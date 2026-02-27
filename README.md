@@ -2,6 +2,9 @@
 **AI 535 Final Project**
 **Authors:** Kellen Sullivan, Siya Sonpatki, Aiden Gabriel
 
+## Notes
+I made the dataset applicable for Yolo using Roboflow. Here is the link https://app.roboflow.com/kellens-workspace-ausjh/underwater-trash-segmentation-io1hv/2
+
 ## Abstract
 The influx of 14 million tons of plastic into oceans annually presents a critical global environmental challenge. Approximately 100,000 marine animals die each year due to ocean debris entanglement. The economic toll reaches $3 billion in lost potential tourism, and damages to marine shipping, fisheries, and aquacultures. Because manually monitoring and removing ocean debris is expensive and difficult, this project proposes a solution for autonomous trash detection and removal. We aim to create robust computer vision for autonomous underwater vehicles (AUVs) to perform precise, pixel-level instance segmentation. This allows AUVs to precisely grab debris.
 
