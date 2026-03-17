@@ -20,24 +20,17 @@ group="dif_model_200_runs"
 run_name="large"
 # "SGD" or "AdamW" (there are others but I haven't used them)
 optimizer="SGD"
-yolo_augmentations=(
-    # "translate=0.1"
-    # "scale=0.3"
-    # "fliplr=0.5"
-    # "degrees=10"
-    # "hsv_h=0.015" 
-    # "hsv_s=0.4" 
-    # "hsv_v=0.4"
-)
-special_augmentations=(
+
+augmentations=(
     # "color_attenuation"
     # "haze"
 )
 
 python main.py \
     --model_name "$model_name" \
-    --yolo_augmentations "${yolo_augmentations[@]}" \
+    --augmentations "${augmentations[@]}" \
     --epochs 200 \
     --wandb_group "$group" \
     --wandb_name "$run_name" \
     --optimizer "$optimizer" \
+    # --learning_rate 0.01 \
