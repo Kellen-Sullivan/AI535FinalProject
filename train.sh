@@ -11,27 +11,33 @@
 
 # Uncomment this section if running this as an asyncronous sbatch script -------------------------------------------------------------------
 # module load cuda/12.8
-# source (your_path_to_conda.sh)/conda.sh
-# conda activate (your env name)
+# source /nfs/hpc/share/gabrieai/miniconda3/etc/profile.d/conda.sh
+# conda activate ai_535
 #-------------------------------------------------------------------------------------------------------------------------------------------------------
 
-group="runs_150_1"
-run_name="sgd_haze"
+model_name="yolo11l-seg.pt"
+group="dif_model_200_runs"
+run_name="large"
 # "SGD" or "AdamW" (there are others but I haven't used them)
 optimizer="SGD"
 yolo_augmentations=(
-    "translate=0.1"
-    "scale=0.3"
-    "fliplr=0.5"
-    "degrees=10"
-    "hsv_h=0.015" 
-    "hsv_s=0.4" 
-    "hsv_v=0.4"
+    # "translate=0.1"
+    # "scale=0.3"
+    # "fliplr=0.5"
+    # "degrees=10"
+    # "hsv_h=0.015" 
+    # "hsv_s=0.4" 
+    # "hsv_v=0.4"
+)
+special_augmentations=(
+    # "color_attenuation"
+    # "haze"
 )
 
 python main.py \
+    --model_name "$model_name" \
     --yolo_augmentations "${yolo_augmentations[@]}" \
-    --epochs 150 \
+    --epochs 200 \
     --wandb_group "$group" \
     --wandb_name "$run_name" \
     --optimizer "$optimizer" \

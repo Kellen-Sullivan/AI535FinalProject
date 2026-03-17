@@ -12,6 +12,14 @@ project = rf.workspace("kellens-workspace-ausjh").project("underwater-trash-segm
 version = project.version(2)
 dataset = version.download("yolov11")
 
+MODELS = [
+    "yolo11n-seg.pt",
+    "yolo11s-seg.pt",
+    "yolo11m-seg.pt",
+    "yolo11l-seg.pt",
+    "yolo11x-seg.pt",
+]
+
 #------------------------------------------------------------------------------------------------------------------------------------------------------
 # Special Augmentations need to be setup as functions in the ../ultralytics/data/augment.py file, and then added to the SPECIAL_AUG_MAP above
 # Unless you're using them, you can ignore the code below. It's just a way to specify custom augmentations that aren't already built into the YOLO training pipeline.
@@ -36,6 +44,7 @@ def on_fit_epoch_end(trainer):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--model_name", type=str, default="yolo11n-seg.pt", help="The name of the YOLO model to use for training (e.g., 'yolo11n-seg.pt').")
     parser.add_argument("--yolo_augmentations", nargs='*', default=[], help="List of strings specifying which augmentations to apply during training.")
     parser.add_argument("--special_augmentations", nargs='*', default=[], help="List of strings specifying which augmentations to apply during training.")
     parser.add_argument("--epochs", type=int, default=50, help="Number of epochs to train the model.")
@@ -47,6 +56,11 @@ def main():
 
     data_yaml = f"{dataset.location}/data.yaml"
 
+    # Check if the specified model is in the list of available models
+    if args.model_name not in MODELS:
+        print(f"Error: Specified model '{args.model_name}' is not in the list of available models: {MODELS}")
+        return
+
     wandb.init(
         project="yolo11-trash-seg", 
         group=args.wandb_group, 
@@ -54,7 +68,7 @@ def main():
         config={
             "epochs": args.epochs,
             "dataset": data_yaml,
-            "model": "yolo11n-seg.pt",
+            "model": args.model_name,
             "special_augmentations": args.special_augmentations,
             "yolo_augmentations": args.yolo_augmentations,
             "optimizer": args.optimizer
@@ -67,7 +81,7 @@ def main():
     print(f"Using special augmentations: {[type(aug).__name__ for aug in special_augs]}")
 
     # Load the seg model
-    model = YOLO("yolo11m-seg.pt")
+    model = YOLO(args.model_name)
     model.add_callback("on_fit_epoch_end", on_fit_epoch_end)
 
     yolo_augs = {k: float(v) for k, v in (s.split('=') for s in args.yolo_augmentations)}
