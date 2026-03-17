@@ -2,6 +2,12 @@
 **AI 535 Final Project**
 **Authors:** Kellen Sullivan, Siya Sonpatki, Aiden Gabriel
 
+## More information
+More info on built in yolo_augmentations in: yolo_augmentations.md
+    - table detailing adding values at the bottom of the file
+More info on hpc in: hpc_slurm.md
+
+
 ## Notes
 I made the dataset applicable for Yolo using Roboflow. Here is the link https://app.roboflow.com/kellens-workspace-ausjh/underwater-trash-segmentation-io1hv/2
 
@@ -31,3 +37,5 @@ To ensure model robustness against underwater environments, we utilize several d
 
 ## Evaluation
 We evaluate performance using Mean Average Precision (mAP) for both bounding boxes and segmentation masks.
+
+
