@@ -47,7 +47,7 @@ def main():
     parser.add_argument("--model_name", type=str, default="yolo11n-seg.pt", help="The name of the YOLO model to use for training (e.g., 'yolo11n-seg.pt').")
     parser.add_argument("--augmentations", nargs='*', default=[], help="List of strings specifying which augmentations to apply during training.")
     parser.add_argument("--epochs", type=int, default=50, help="Number of epochs to train the model.")
-    parser.add_argument("--optimizer", type=str, default="AdamW", help="The optimizer to use for training (e.g., 'Adam', 'SGD').")
+    parser.add_argument("--optimizer", type=str, default="SGD", help="The optimizer to use for training (e.g., 'Adam', 'SGD').")
     parser.add_argument("--learning_rate", type=float, default=0.01, help="The learning rate to use for training.")
     
     parser.add_argument("--wandb_group", type=str, default="unnamed", help="The group name for the Weights & Biases run.")
